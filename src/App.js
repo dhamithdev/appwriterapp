@@ -1,7 +1,33 @@
 import logo from './logo.svg';
 import './App.css';
+import { account } from './api';
+
+
 
 function App() {
+
+
+
+  const loginUser = async (e) => {
+    e.preventDefault()
+    try {
+
+     await account.create(
+        'unique()',
+        'me@example.com',
+        'password',
+        'Jane Doe'
+      ).then(response => {
+        console.log(response);
+      }, error => {
+        console.log(error);
+      });
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +43,7 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={loginUser}></button>
       </header>
     </div>
   );
